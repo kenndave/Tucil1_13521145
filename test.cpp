@@ -1,6 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <fstream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int strToInt(string x){
@@ -49,7 +48,6 @@ double operasi(double a, double b, string c){
         return (a * b);
     }
 }
-
 double hitung(double a, double b, double c, double d, string op1, string op2, string op3, int var){
     double hasil, sub;
     if (var == 1){
@@ -143,32 +141,43 @@ double hitung(double a, double b, double c, double d, string op1, string op2, st
         return 0;
     }
 }
+int main(){
+    // Containers
+    vector<string> solutions;
+    string solution, sinput[4], op[4] = {" + ", " - ", " / ", " * "};
+    int input[4];
+    bool valid = false, already, save; 
+    int a, b, c, d, sol = 0;
+    double sub, hasil;
+    // Jenis kurung
+    // ((a op b) op c) op d --> a ama b, hasil ama c, hasil ama d
+    // (a op (b op c)) op d --> b ama c, a sama hasil, hasil sama d
+    // (a op b) op (c op d) --> a ama b, c ama d, hasil ab sama hasil cd
+    // a op ((b op c) op d) --> b ama c, hasil ama d, a sama hasil.
+    // a op (b op (c op d)) -- > c ama d, b ama hasil, a ama hasil.
 
-void BruteForce(char x, vector<string>& solutions){
-    string sinput[4], op[4] = {" + ", " - ", " / ", " * "};
-    if (x == '1'){
-        while (!valid){
-            cout << "Enter 4 numbers:" << endl;
-            cin >> sinput[0] >> sinput[1] >> sinput[2] >> sinput[3];
-            for (int x = 0; x < 4; x++){
-                valid = true;
-                if (sinput[x] == "A"){input[x] = 1;}
-                else if (sinput[x] == "2"){input[x] = 2;}
-                else if (sinput[x] == "3"){input[x] = 3;}
-                else if (sinput[x] == "4"){input[x] = 4;}
-                else if (sinput[x] == "5"){input[x] = 5;}
-                else if (sinput[x] == "6"){input[x] = 6;}
-                else if (sinput[x] == "7"){input[x] = 7;}
-                else if (sinput[x] == "8"){input[x] = 8;}
-                else if (sinput[x] == "9"){input[x] = 9;}
-                else if (sinput[x] == "10"){input[x] = 10;}
-                else if (sinput[x] == "J"){input[x] = 11;}
-                else if (sinput[x] == "Q"){input[x] = 12;}
-                else if (sinput[x] == "K"){input[x] = 13;}
-                else{
-                    valid = false;
-                    break;
-                }
+    // Input
+    while (!valid){
+        cout << "Enter 4 numbers:" << endl;
+        cin >> sinput[0] >> sinput[1] >> sinput[2] >> sinput[3];
+        for (int x = 0; x < 4; x++){
+            valid = true;
+            if (sinput[x] == "A"){input[x] = 1;}
+            else if (sinput[x] == "2"){input[x] = 2;}
+            else if (sinput[x] == "3"){input[x] = 3;}
+            else if (sinput[x] == "4"){input[x] = 4;}
+            else if (sinput[x] == "5"){input[x] = 5;}
+            else if (sinput[x] == "6"){input[x] = 6;}
+            else if (sinput[x] == "7"){input[x] = 7;}
+            else if (sinput[x] == "8"){input[x] = 8;}
+            else if (sinput[x] == "9"){input[x] = 9;}
+            else if (sinput[x] == "10"){input[x] = 10;}
+            else if (sinput[x] == "J"){input[x] = 11;}
+            else if (sinput[x] == "Q"){input[x] = 12;}
+            else if (sinput[x] == "K"){input[x] = 13;}
+            else{
+                valid = false;
+                break;
             }
         }
     }
@@ -275,39 +284,91 @@ void BruteForce(char x, vector<string>& solutions){
             }
         }
     }
+    // Output
     
-}
-
-int main(){
-    // KAMUS
-    vector<string> answers;
-    int input[4];
-    bool valid = false, already, save, pick = false; 
-    int a, b, c, d, sol = 0;
-    double sub, hasil;
-    char mode;
-    // ALGORITMA UTAMA
-    cout << "Selamat datang di permainan kartu 24!" << endl;
-                    cout << " __   __  ___  _   _______   ___ _____   ____    _   " << endl;  
-                    cout << "|  \\ /  |/ _ \\| | / /  ___) (   |_   _) (___ \\ /  |  " << endl;  
-                    cout << "|   v   | |_| | |/ /| |_     | |  | |     __) ) o |_ " << endl;  
-                    cout << "| |\\_/| |  _  |   < |  _)    | |  | |    / __/__   _)" << endl;  
-                    cout << "| |   | | | | | |\\ \\| |___   | |  | |   | |___  | |  " << endl;  
-                    cout << "|_|   |_|_| |_|_| \\_\\_____) (___) |_|   |_____) |_|  " << "\n" << endl;
-    while (!pick){
-        cout << "Pilihlah (urutan angka) mode permainan yang ingin dimainkan." << endl;
-        cout << "1. Input pilihan pengguna" << endl;
-        cout << "2. Pilihan angka secara acak." << endl;
-        cin >> mode;
-        if (mode == '1'){
-            BruteForce(mode, solutions);
-            pick =  true;
+    // File
+    ofstream MyFile("filename.txt");
+    int pause = 1;
+    for (string soll: solutions){
+        if (pause % 4 == 0){
+            MyFile << soll << endl;
+            cout << soll << endl;
         }
-        else if (mode == '2'){
-            BruteForce(mode, solutions);
-            pick = true;
+        else{
+            MyFile << soll << "    ";
+            cout << soll << "    ";
         }
+        pause++;
+    }
+    if ((pause-1) % 4 != 0){
+        cout << "\n" << "Jumlah solusi: " << sol << "." << endl;;
+    }
+    else{
+        cout << "Jumlah solusi: " << sol << "." << endl;
     }
 
-
+    char ans;
+    save = false;
+    while (!save){
+        if ((ans != 'Y') || (ans != 'y') || (ans != 'N') || (ans != 'n')){
+            cout << "Save answer? (Y/N)" << endl;
+            cin >> ans;
+            save = true;
+        }
+    }
+    if (ans == 'Y' || ans == 'y'){
+        cout << "File saved." << endl;
+        MyFile.close();
+    }
+    else{
+        cout << "File not saved." << endl;
+    }
 }
+
+
+
+
+
+
+
+
+
+// Output
+    
+    // File
+    ofstream MyFile("filename.txt");
+    int pause = 1;
+    for (string soll: solutions){
+        if (pause % 4 == 0){
+            MyFile << soll << endl;
+            cout << soll << endl;
+        }
+        else{
+            MyFile << soll << "    ";
+            cout << soll << "    ";
+        }
+        pause++;
+    }
+    if ((pause-1) % 4 != 0){
+        cout << "\n" << "Jumlah solusi: " << sol << "." << endl;;
+    }
+    else{
+        cout << "Jumlah solusi: " << sol << "." << endl;
+    }
+
+    char ans;
+    save = false;
+    while (!save){
+        if ((ans != 'Y') || (ans != 'y') || (ans != 'N') || (ans != 'n')){
+            cout << "Save answer? (Y/N)" << endl;
+            cin >> ans;
+            save = true;
+        }
+    }
+    if (ans == 'Y' || ans == 'y'){
+        cout << "File saved." << endl;
+        MyFile.close();
+    }
+    else{
+        cout << "File not saved." << endl;
+    }
