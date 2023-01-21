@@ -1,6 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <fstream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int strToInt(string x){
@@ -144,8 +142,15 @@ double hitung(double a, double b, double c, double d, string op1, string op2, st
     }
 }
 
-void BruteForce(char x, vector<string>& solutions){
-    string sinput[4], op[4] = {" + ", " - ", " / ", " * "};
+void BruteForce(char x, vector<string>& solutions, int& sol){
+    // KAMUS LOKAL
+    string solution, sinput[4], op[4] = {" + ", " - ", " / ", " * "};
+    int input[4];
+    bool already, valid = false, save = false;
+    double hasil;
+    char ans;
+    int a, b, c, d;
+    //
     if (x == '1'){
         while (!valid){
             cout << "Enter 4 numbers:" << endl;
@@ -281,11 +286,10 @@ void BruteForce(char x, vector<string>& solutions){
 int main(){
     // KAMUS
     vector<string> answers;
-    int input[4];
-    bool valid = false, already, save, pick = false; 
-    int a, b, c, d, sol = 0;
-    double sub, hasil;
-    char mode;
+    string filename = " ";
+    int sol = 0;
+    bool pick = false, save = false; 
+    char mode, ans;
     // ALGORITMA UTAMA
     cout << "Selamat datang di permainan kartu 24!" << endl;
                     cout << " __   __  ___  _   _______   ___ _____   ____    _   " << endl;  
@@ -300,13 +304,52 @@ int main(){
         cout << "2. Pilihan angka secara acak." << endl;
         cin >> mode;
         if (mode == '1'){
-            BruteForce(mode, solutions);
+            BruteForce(mode, answers, sol);
             pick =  true;
         }
         else if (mode == '2'){
-            BruteForce(mode, solutions);
+            BruteForce(mode, answers, sol);
             pick = true;
         }
+    }
+    // Output
+    
+    // File
+    ofstream MyFile(filename + ".txt");
+    int pause = 1;
+    for (string soll: answers){
+        if (pause % 4 == 0){
+            MyFile << soll << endl;
+            cout << soll << endl;
+        }
+        else{
+            MyFile << soll << "    ";
+            cout << soll << "    ";
+        }
+        pause++;
+    }
+    if ((pause-1) % 4 != 0){
+        cout << "\n" << "Jumlah solusi: " << sol << "." << endl;;
+    }
+    else{
+        cout << "Jumlah solusi: " << sol << "." << endl;
+    }
+
+    while (!save){
+        if ((ans != 'Y') || (ans != 'y') || (ans != 'N') || (ans != 'n')){
+            cout << "Save answer? (Y/N)" << endl;
+            cin >> ans;
+            save = true;
+        }
+    }
+    if (ans == 'Y' || ans == 'y'){
+        cout << "File name: (tanpa format)" << endl;
+        cin >> filename;
+        cout << "File saved." << endl;
+        MyFile.close();
+    }
+    else{
+        cout << "File not saved." << endl;
     }
 
 
