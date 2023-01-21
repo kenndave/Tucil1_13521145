@@ -222,6 +222,17 @@ void BruteForce(char x, vector<string>& solutions, int& sol){
             }
         }
     }
+    if (x == '2'){
+        srand(time(nullptr));
+        for (int i = 0; i < 4; i++){
+            input[i] = (rand() % 13) + 1;
+        }
+        cout << "Kartu yang didapatkan: ";
+        for (int i = 0; i < 4; i++){
+            cout << intToStr(input[i]) << " ";
+        }
+        cout << endl;
+    }
     //cout << "The four numbers are: " << input[0] << ", " << input[1] << ", " << input[2] << ", " << input[3] << "." << endl;
     // Algoritma
     // Case 1
