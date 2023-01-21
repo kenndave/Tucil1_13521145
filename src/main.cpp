@@ -44,7 +44,9 @@ int strToInt(string x){
     }
 }
 string intToStr(int x){
-    if (x == 1){return "A";}
+    if (x == 1){
+        return "1";
+    }
     else if (x == 2){
         return "2";
     }
@@ -73,13 +75,13 @@ string intToStr(int x){
         return "10";
     }
     else if (x == 11){
-        return "J";
+        return "11";
     }
     else if (x == 12){
-        return "Q";
+        return "12";
     }
     else if (x == 13){
-        return "K";
+        return "13";
     }
     else{
         return " ";
@@ -370,7 +372,11 @@ int main(){
     }
     // Output
     int pause = 1;
+    cout << "Jumlah solusi: " << sol << "." << "\n" << endl;
     for (string soll: answers){
+        cout << soll << endl;
+    }
+    /*for (string soll: answers){
         if (pause % 4 == 0){
             cout << soll << endl;
         }
@@ -378,14 +384,7 @@ int main(){
             cout << soll << "    ";
         }
         pause++;
-    }
-    if ((pause-1) % 4 != 0){
-        cout << "\n" << "Jumlah solusi: " << sol << "." << endl;;
-    }
-    else{
-        cout << "Jumlah solusi: " << sol << "." << endl;
-    }
-
+    }*/
     while (!save){
         if ((ans != 'Y') || (ans != 'y') || (ans != 'N') || (ans != 'n')){
             cout << "Save answer? (Y/N)" << endl;
