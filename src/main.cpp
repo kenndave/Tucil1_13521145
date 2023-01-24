@@ -203,34 +203,58 @@ double hitung(double a, double b, double c, double d, string op1, string op2, st
     }
 }
 
-void BruteForce(char x, vector<string>& solutions, int& sol){
+void BruteForce(string x, vector<string>& solutions, int& sol){
     // KAMUS LOKAL
-    string solution, sinput[4], op[4] = {" + ", " - ", " / ", " * "};
+    string inpt, solution, op[4] = {" + ", " - ", " / ", " * "};
     int input[4];
     bool already, valid = false, save = false;
     double hasil;
     char ans;
-    int a, b, c, d, e;
+    int a, b, c, d, e, lngth = 7, space_count;
     // ALGORITMA 
-    if (x == '1'){
+    if (x == "1"){
         while (!valid){
-            cout << "Nilai-nilai kartu: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J Q K"
-            cout << "Masukkan 4 nilai kartu:" << endl;
-            cin >> sinput[0] >> sinput[1] >> sinput[2] >> sinput[3];
-            for (int x = 0; x < 4; x++){
-                valid = true;
-                e = strToInt(sinput[x]);
-                if (e > 0 && e < 14){
-                    input[x] = e;
+            string sinput[4];
+            bool enough_space = false;
+            space_count = 0;
+            cout << "Nilai-nilai kartu: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J Q K" << endl;
+            cout << "Masukkan 4 nilai kartu (setiap nilai dipisahkan dengan spasi):" << endl;
+            getline(cin >> ws, inpt);
+            for(char space : inpt){
+                if (space == ' '){
+                    space_count++;
                 }
-                else{
-                    valid = false;
-                    break;
+            }
+            if (space_count == 3){
+                enough_space = true;
+                int i = 0, j = 0;
+                while ((i < inpt.length()) && (j <= 3)){
+                    if (inpt[i] != ' '){
+                        sinput[j] += inpt[i];
+                        i++;
+                    }
+                    else{
+                        i++;
+                        j++;
+                    }
+                }
+            }
+            if (enough_space){
+                for (int x = 0; x < 4; x++){
+                    valid = true;
+                    e = strToInt(sinput[x]);
+                    if (e > 0 && e < 14){
+                        input[x] = e;
+                    }
+                    else{
+                        valid = false;
+                        break;
+                    }
                 }
             }
         }
     }
-    if (x == '2'){
+    if (x == "2"){
         srand(time(nullptr));
         for (int i = 0; i < 4; i++){
             input[i] = (rand() % 13) + 1;
@@ -244,96 +268,98 @@ void BruteForce(char x, vector<string>& solutions, int& sol){
     //cout << "The four numbers are: " << input[0] << ", " << input[1] << ", " << input[2] << ", " << input[3] << "." << endl;
     // Algoritma
     // Case 1
-    for (string i : op){
-        for (string j : op){
-            for (string k : op){
-                // looping operasi
-                for (int idx1 = 0; idx1 < 4; idx1++){
-                    a = input[idx1];
-                    for (int idx2 = 0; idx2 < 4; idx2++){
-                        b = input[idx2];
-                        for (int idx3 = 0; idx3 < 4; idx3++){
-                            c = input[idx3];
-                            for (int idx4 = 0; idx4 < 4; idx4++){
-                                d = input[idx4];
-                                // looping (permutasi) input
-                                if (idx1 != idx2 && idx1 != idx3 && idx1 != idx4 && idx2 != idx3 && idx2 != idx4 && idx3 != idx4){
-                                    // varian 1
-                                    hasil = hitung(a, b, c, d, i, j, k, 1);
-                                    if (hasil == 24){
-                                        solution = "((" + intToStr(a) + i + intToStr(b) + ")" + j + intToStr(c) + ")" + k + intToStr(d);
-                                        already = false;
-                                        for (string check : solutions){
-                                            if (solution == check){
-                                                already = true;
-                                                break;
+    if (valid){
+        for (string i : op){
+            for (string j : op){
+                for (string k : op){
+                    // looping operasi
+                    for (int idx1 = 0; idx1 < 4; idx1++){
+                        a = input[idx1];
+                        for (int idx2 = 0; idx2 < 4; idx2++){
+                            b = input[idx2];
+                            for (int idx3 = 0; idx3 < 4; idx3++){
+                                c = input[idx3];
+                                for (int idx4 = 0; idx4 < 4; idx4++){
+                                    d = input[idx4];
+                                    // looping (permutasi) input
+                                    if (idx1 != idx2 && idx1 != idx3 && idx1 != idx4 && idx2 != idx3 && idx2 != idx4 && idx3 != idx4){
+                                        // varian 1
+                                        hasil = hitung(a, b, c, d, i, j, k, 1);
+                                        if (hasil == 24){
+                                            solution = "((" + intToStr(a) + i + intToStr(b) + ")" + j + intToStr(c) + ")" + k + intToStr(d);
+                                            already = false;
+                                            for (string check : solutions){
+                                                if (solution == check){
+                                                    already = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (!already){
+                                                solutions.push_back(solution);
+                                                sol++;
+                                            } 
+                                        }
+                                        // varian 2
+                                        hasil = hitung(a, b, c, d, i, j, k, 2);
+                                        if (hasil == 24){
+                                            solution = "(" + intToStr(a) + i + "(" + intToStr(b) + j + intToStr(c) + "))" + k + intToStr(d);
+                                            already = false;
+                                            for (string check : solutions){
+                                                if (solution == check){
+                                                    already = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (!already){
+                                                solutions.push_back(solution);
+                                                sol++;
                                             }
                                         }
-                                        if (!already){
-                                            solutions.push_back(solution);
-                                            sol++;
-                                        } 
-                                    }
-                                    // varian 2
-                                    hasil = hitung(a, b, c, d, i, j, k, 2);
-                                    if (hasil == 24){
-                                        solution = "(" + intToStr(a) + i + "(" + intToStr(b) + j + intToStr(c) + "))" + k + intToStr(d);
-                                        already = false;
-                                        for (string check : solutions){
-                                            if (solution == check){
-                                                already = true;
-                                                break;
+                                        hasil = hitung(a, b, c, d, i, j, k, 3);
+                                        if (hasil == 24){
+                                            solution = "(" + intToStr(a) + i + intToStr(b) + ")" + j + "(" + intToStr(c) + k + intToStr(d) + ")";
+                                            already = false;
+                                            for (string check : solutions){
+                                                if (solution == check){
+                                                    already = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (!already){
+                                                solutions.push_back(solution);
+                                                sol++;
                                             }
                                         }
-                                        if (!already){
-                                            solutions.push_back(solution);
-                                            sol++;
-                                        }
-                                    }
-                                    hasil = hitung(a, b, c, d, i, j, k, 3);
-                                    if (hasil == 24){
-                                        solution = "(" + intToStr(a) + i + intToStr(b) + ")" + j + "(" + intToStr(c) + k + intToStr(d) + ")";
-                                        already = false;
-                                        for (string check : solutions){
-                                            if (solution == check){
-                                                already = true;
-                                                break;
+                                        hasil = hitung(a, b, c, d, i, j, k, 4);
+                                        if (hasil == 24){
+                                            solution = intToStr(a) + i + "((" + intToStr(b) + j + intToStr(c) + ")" + k + intToStr(d) + ")";
+                                            already = false;
+                                            for (string check : solutions){
+                                                if (solution == check){
+                                                    already = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (!already){
+                                                solutions.push_back(solution);
+                                                sol++;
                                             }
                                         }
-                                        if (!already){
-                                            solutions.push_back(solution);
-                                            sol++;
-                                        }
-                                    }
-                                    hasil = hitung(a, b, c, d, i, j, k, 4);
-                                    if (hasil == 24){
-                                        solution = intToStr(a) + i + "((" + intToStr(b) + j + intToStr(c) + ")" + k + intToStr(d) + ")";
-                                        already = false;
-                                        for (string check : solutions){
-                                            if (solution == check){
-                                                already = true;
-                                                break;
+                                        // a op (b op (c op d)) -- > c ama d, b ama hasil, a ama hasil.
+                                        hasil = hitung(a, b, c, d, i, j, k, 5);
+                                        if (hasil == 24){
+                                            solution = intToStr(a) + i + "(" + intToStr(b) + j + "(" + intToStr(c) + k + intToStr(d) + "))";
+                                            already = false;
+                                            for (string check : solutions){
+                                                if (solution == check){
+                                                    already = true;
+                                                    break;
+                                                }
                                             }
-                                        }
-                                        if (!already){
-                                            solutions.push_back(solution);
-                                            sol++;
-                                        }
-                                    }
-                                    // a op (b op (c op d)) -- > c ama d, b ama hasil, a ama hasil.
-                                    hasil = hitung(a, b, c, d, i, j, k, 5);
-                                    if (hasil == 24){
-                                        solution = intToStr(a) + i + "(" + intToStr(b) + j + "(" + intToStr(c) + k + intToStr(d) + "))";
-                                        already = false;
-                                        for (string check : solutions){
-                                            if (solution == check){
-                                                already = true;
-                                                break;
+                                            if (!already){
+                                                solutions.push_back(solution);
+                                                sol++;
                                             }
-                                        }
-                                        if (!already){
-                                            solutions.push_back(solution);
-                                            sol++;
                                         }
                                     }
                                 }
@@ -344,7 +370,6 @@ void BruteForce(char x, vector<string>& solutions, int& sol){
             }
         }
     }
-    
 }
 
 int main(){
@@ -353,7 +378,8 @@ int main(){
     string filename = " ";
     int sol = 0;
     bool pick = false, save = false; 
-    char mode, ans;
+    char ans;
+    string mode;
     // ALGORITMA UTAMA
     cout << "Selamat datang di permainan kartu 24!" << endl;
                     cout << " __   __  ___  _   _______   ___ _____   ____    _     _" << endl;  
@@ -366,12 +392,12 @@ int main(){
         cout << "Pilihlah (urutan angka) mode permainan yang ingin dimainkan." << endl;
         cout << "1. Input pilihan pengguna" << endl;
         cout << "2. Pilihan angka secara acak." << endl;
-        cin >> mode;
-        if (mode == '1'){
+        getline(cin, mode);
+        if (mode == "1"){
             BruteForce(mode, answers, sol);
             pick =  true;
         }
-        else if (mode == '2'){
+        else if (mode == "2"){
             BruteForce(mode, answers, sol);
             pick = true;
         }
