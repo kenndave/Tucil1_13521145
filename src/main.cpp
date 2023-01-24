@@ -214,7 +214,8 @@ void BruteForce(char x, vector<string>& solutions, int& sol){
     // ALGORITMA 
     if (x == '1'){
         while (!valid){
-            cout << "Enter 4 numbers:" << endl;
+            cout << "Nilai-nilai kartu: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J Q K"
+            cout << "Masukkan 4 nilai kartu:" << endl;
             cin >> sinput[0] >> sinput[1] >> sinput[2] >> sinput[3];
             for (int x = 0; x < 4; x++){
                 valid = true;
