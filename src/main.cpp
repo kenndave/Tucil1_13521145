@@ -2,6 +2,7 @@
 using namespace std;
 
 int strToInt(string x){
+    // ALGORITMA
     if (x == "A"){return 1;}
     else if (x == "2"){
         return 2;
@@ -44,6 +45,7 @@ int strToInt(string x){
     }
 }
 string intToStr(int x){
+    // ALGORITMA
     if (x == 1){
         return "1";
     }
@@ -88,6 +90,7 @@ string intToStr(int x){
     }
 }
 double operasi(double a, double b, string c){
+    // ALGORITMA
     if (c == " + "){
         return (a + b);
     }
@@ -105,7 +108,9 @@ double operasi(double a, double b, string c){
 }
 
 double hitung(double a, double b, double c, double d, string op1, string op2, string op3, int var){
+    // KAMUS LOKAL
     double hasil, sub;
+    // ALGORITMA
     if (var == 1){
         if ((b == 0 && op1 == " / ") || (c == 0 && op2 == " / ") || (d == 0 && op3 == " / ")){
             return 0;
@@ -167,7 +172,7 @@ double hitung(double a, double b, double c, double d, string op1, string op2, st
             }
         }
     }
-    else if (var == 6){
+    else if (var == 5){
         // a op (b op (c op d)) -- > c ama d, b ama hasil, a ama hasil.
         hasil = operasi(c, d, op3);
         hasil = operasi(b, hasil, op2);
@@ -206,7 +211,7 @@ void BruteForce(char x, vector<string>& solutions, int& sol){
     double hasil;
     char ans;
     int a, b, c, d, e;
-    //
+    // ALGORITMA 
     if (x == '1'){
         while (!valid){
             cout << "Enter 4 numbers:" << endl;
@@ -376,24 +381,15 @@ int main(){
     for (string soll: answers){
         cout << soll << endl;
     }
-    /*for (string soll: answers){
-        if (pause % 4 == 0){
-            cout << soll << endl;
-        }
-        else{
-            cout << soll << "    ";
-        }
-        pause++;
-    }*/
     while (!save){
         if ((ans != 'Y') || (ans != 'y') || (ans != 'N') || (ans != 'n')){
-            cout << "Save answer? (Y/N)" << endl;
+            cout << "Apakah anda ingin menyimpan luaran solusi tersebut? (Y/N)" << endl;
             cin >> ans;
             save = true;
         }
     }
     if (ans == 'Y' || ans == 'y'){
-        cout << "File name: (tanpa format)" << endl;
+        cout << "Nama file yang diinginkan: (tanpa format)" << endl;
         cin >> filename;
         //string full = "../bin/" + filename + ".txt";
         string file = "../bin/" + filename + ".txt";
@@ -409,11 +405,11 @@ int main(){
             all++;
         }
         //MyFile.open(full);
-        cout << "File saved." << endl;
+        cout << "File tersimpan." << endl;
         MyFile.close();
     }
     else{
-        cout << "File not saved." << endl;
+        cout << "File tidak tersimpan." << endl;
     }
 
 
