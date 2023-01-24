@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
+#include <ctime>
+#include <cmath>
 using namespace std;
+using namespace std::chrono;
 
 int strToInt(string x){
     // ALGORITMA
@@ -203,7 +206,7 @@ double hitung(double a, double b, double c, double d, string op1, string op2, st
     }
 }
 
-void BruteForce(string x, vector<string>& solutions, int& sol){
+long BruteForce(string x, vector<string>& solutions, int& sol){
     // KAMUS LOKAL
     string inpt, solution, op[4] = {" + ", " - ", " / ", " * "};
     int input[4];
@@ -217,7 +220,7 @@ void BruteForce(string x, vector<string>& solutions, int& sol){
             string sinput[4];
             bool enough_space = false;
             space_count = 0;
-            cout << "Nilai-nilai kartu: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J Q K" << endl;
+            cout << "Nilai-nilai kartu: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K" << endl;
             cout << "Masukkan 4 nilai kartu (setiap nilai dipisahkan dengan spasi):" << endl;
             getline(cin >> ws, inpt);
             for(char space : inpt){
@@ -268,6 +271,7 @@ void BruteForce(string x, vector<string>& solutions, int& sol){
     //cout << "The four numbers are: " << input[0] << ", " << input[1] << ", " << input[2] << ", " << input[3] << "." << endl;
     // Algoritma
     // Case 1
+    int mulai = clock();
     if (valid){
         for (string i : op){
             for (string j : op){
@@ -370,54 +374,23 @@ void BruteForce(string x, vector<string>& solutions, int& sol){
             }
         }
     }
+    int berhenti = clock();
+    return (berhenti-mulai);
 }
 
-int main(){
-    // KAMUS
-    vector<string> answers;
-    string filename = " ";
-    int sol = 0;
-    bool pick = false, save = false; 
-    char ans;
-    string mode;
-    // ALGORITMA UTAMA
-    cout << "Selamat datang di permainan kartu 24!" << endl;
-                    cout << " __   __  ___  _   _______   ___ _____   ____    _     _" << endl;  
-                    cout << "|  \\ /  |/ _ \\| | / /  ___) (   |_   _) (___ \\ /  |   | |" << endl;  
-                    cout << "|   v   | |_| | |/ /| |_     | |  | |     __) ) o |_  | |" << endl;  
-                    cout << "| |\\_/| |  _  |   < |  _)    | |  | |    / __/__   _) | |" << endl;  
-                    cout << "| |   | | | | | |\\ \\| |___   | |  | |   | |___  | |   |_|" << endl;  
-                    cout << "|_|   |_|_| |_|_| \\_\\_____) (___) |_|   |_____) |_|    O" << "\n" << endl;
-    while (!pick){
-        cout << "Pilihlah (urutan angka) mode permainan yang ingin dimainkan." << endl;
-        cout << "1. Input pilihan pengguna" << endl;
-        cout << "2. Pilihan angka secara acak." << endl;
-        getline(cin, mode);
-        if (mode == "1"){
-            BruteForce(mode, answers, sol);
-            pick =  true;
-        }
-        else if (mode == "2"){
-            BruteForce(mode, answers, sol);
-            pick = true;
-        }
-    }
-    // Output
-    int pause = 1;
-    cout << "Jumlah solusi: " << sol << "." << "\n" << endl;
-    for (string soll: answers){
-        cout << soll << endl;
-    }
+void saveFile(vector<string> answers){
+    string ans, filename;
+    bool save;
     while (!save){
-        if ((ans != 'Y') || (ans != 'y') || (ans != 'N') || (ans != 'n')){
+        if ((ans != "Y") || (ans != "y") || (ans != "N") || (ans != "n")){
             cout << "Apakah anda ingin menyimpan luaran solusi tersebut? (Y/N)" << endl;
-            cin >> ans;
+            getline(cin, ans);
             save = true;
         }
     }
-    if (ans == 'Y' || ans == 'y'){
+    if (ans == "Y" || ans == "y"){
         cout << "Nama file yang diinginkan: (tanpa format)" << endl;
-        cin >> filename;
+        getline(cin, filename);
         //string full = "../bin/" + filename + ".txt";
         string file = "../bin/" + filename + ".txt";
         int all = 1;
@@ -438,6 +411,42 @@ int main(){
     else{
         cout << "File tidak tersimpan." << endl;
     }
-
-
+}
+int main(){
+    // KAMUS
+    vector<string> answers;
+    string filename = " ";
+    int ex, sol = 0;
+    bool pick = false, save = false; 
+    string mode, ans;
+    // ALGORITMA UTAMA
+    cout << "Selamat datang di permainan kartu 24!" << endl;
+                    cout << " __   __  ___  _   _______   ___ _____   ____    _     _" << endl;  
+                    cout << "|  \\ /  |/ _ \\| | / /  ___) (   |_   _) (___ \\ /  |   | |" << endl;  
+                    cout << "|   v   | |_| | |/ /| |_     | |  | |     __) ) o |_  | |" << endl;  
+                    cout << "| |\\_/| |  _  |   < |  _)    | |  | |    / __/__   _) | |" << endl;  
+                    cout << "| |   | | | | | |\\ \\| |___   | |  | |   | |___  | |   |_|" << endl;  
+                    cout << "|_|   |_|_| |_|_| \\_\\_____) (___) |_|   |_____) |_|    O" << "\n" << endl;
+    while (!pick){
+        cout << "Pilihlah (urutan angka) mode permainan yang ingin dimainkan." << endl;
+        cout << "1. Input pilihan pengguna" << endl;
+        cout << "2. Pilihan angka secara acak." << endl;
+        getline(cin, mode);
+        if (mode == "1"){
+            ex = BruteForce(mode, answers, sol);
+            pick =  true;
+        }
+        else if (mode == "2"){
+            ex = BruteForce(mode, answers, sol);
+            pick = true;
+        }
+    }
+    // Output
+    int pause = 1;
+    for (string soll: answers){
+        cout << soll << endl;
+    }
+    cout << "Jumlah solusi  : " << sol << "." << endl;
+    cout << "Waktu Eksekusi : " << ex << " milisekon." << endl;
+    saveFile(answers);
 }
