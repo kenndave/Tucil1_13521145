@@ -258,9 +258,12 @@ long BruteForce(string x, vector<string>& solutions, int& sol){
         }
     }
     if (x == "2"){
+        valid = true;
+        string sinput[4];
         srand(time(nullptr));
         for (int i = 0; i < 4; i++){
             input[i] = (rand() % 13) + 1;
+            sinput[i] = intToStr(input[i]);
         }
         cout << "Kartu yang didapatkan: ";
         for (int i = 0; i < 4; i++){
