@@ -2,7 +2,7 @@
 Disusun untuk memenuhi Tugas Kecil 1 IF2211 Strategi Algoritma "Penyelesaian Permainan Kartu 24 dengan Algoritma Brute Force".
 
 ## Daftar Isi
-* [Deskripsi Singkat Program](#deskripsi-singkat)
+* [Deskripsi Singkat Program](#deskripsi-singkat-program)
 * [Sistematika File](#sistematika-file)
 * [Requirements](#requirements)
 * [Cara Kompilasi Program](#cara-kompilasi-program)
@@ -39,7 +39,7 @@ C++ versi 6.3.0 atau lebih baru
 2. Untuk memulai program, jalankan command `./main`. Program akan mulai berjalan.
 
 ## Dibuat oleh
-Nama: Kenneth Dave Bahana
-NIM: 13521145
-Prodi/Jurusan: STEI/Teknik Informatika
-Profile Github: kenndave
+* Nama: Kenneth Dave Bahana
+* NIM: 13521145
+* Prodi/Jurusan: STEI/Teknik Informatika
+* Profile Github: kenndave
