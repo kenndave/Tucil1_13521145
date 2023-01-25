@@ -395,7 +395,7 @@ void saveFile(vector<string> answers){
         cout << "Nama file yang diinginkan: (tanpa format)" << endl;
         getline(cin, filename);
         //string full = "../bin/" + filename + ".txt";
-        string file = "../bin/" + filename + ".txt";
+        string file = "bin/" + filename + ".txt";
         int all = 1;
         ofstream MyFile(file);
         for (string soll: answers){
