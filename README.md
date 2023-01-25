@@ -1,4 +1,4 @@
-# Permainan Kartu 24♠
+# Permainan Kartu 24♥
 Disusun untuk memenuhi Tugas Kecil 1 IF2211 Strategi Algoritma "Penyelesaian Permainan Kartu 24 dengan Algoritma Brute Force".
 
 ## Daftar Isi
