@@ -2,12 +2,10 @@
 Disusun untuk memenuhi Tugas Kecil 1 IF2211 Strategi Algoritma "Penyelesaian Permainan Kartu 24 dengan Algoritma Brute Force".
 
 ## Daftar Isi
-* [Anggota Kelompok](#anggota-kelompok)
-* [Implementasi Program](#implementasi-program)
+* [Deskripsi Singkat Program](#anggota-kelompok)
 * [Sistematika File](#sistematika-file)
 * [Requirements](#requirements)
 * [Cara Menjalankan Program](#cara-menjalankan-program)
-* [Screenshots](#screenshots)
 
 ## Sistematika File
 ```bash
