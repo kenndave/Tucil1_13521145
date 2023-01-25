@@ -27,6 +27,7 @@ Program untuk mencari semua solusi yang menghasilkan nilai 24 dari suatu empat n
 │   ├─── tc4.txt
 │   ├─── tc5.txt
 └─── README.md
+```
 ## Requirements
 C++ versi 6.3.0 atau lebih baru
 
